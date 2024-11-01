@@ -13,15 +13,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Dotenv dotenv = Dotenv.load();
-
-        String dbname = dotenv.get("DB_NAME");
-        String dbusername = dotenv.get("DB_USERNAME");
-        String dbpassword = dotenv.get("DB_PASSWORD");
-
-        // Database connection
-        Database db = new Database();
-        db.connect(dbname, dbusername, dbpassword);
+        Database db = Database.getInstance();
+        db.getConnection();
 
         // Load login.fxml
         File xmlfile = new File("src/main/java/org/example/hastane/views/login.fxml");
@@ -33,6 +26,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

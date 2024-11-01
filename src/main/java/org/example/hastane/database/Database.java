@@ -1,35 +1,46 @@
 package org.example.hastane.database;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import org.postgresql.util.JdbcBlackHole;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String URL = "jdbc:postgresql://localhost:5432/";
-
+    private static Database instance;
     private Connection connection;
+    private String dbname;
+    private String dbusername;
+    private String dbpassword;
+    private String dbhost;
+    private String dbport;
 
-    public void connect(String database, String user, String password) {
+    // Private constructor to prevent instantiation
+    private Database() {
         try {
-            connection = DriverManager.getConnection(URL+database, user, password);
-            System.out.println("Bağlantı başarılı!");
+            Dotenv dotenv = Dotenv.load();
+            dbname = dotenv.get("DB_NAME");
+            dbusername = dotenv.get("DB_USERNAME");
+            dbpassword = dotenv.get("DB_PASSWORD");
+            dbhost = dotenv.get("DB_HOST");
+            dbport = dotenv.get("DB_PORT");
+
+            connection = DriverManager.getConnection("jdbc:postgresql://" + dbhost + ":" + dbport + "/" + dbname, dbusername, dbpassword);
+            System.out.println("Database connection successful!");
         } catch (SQLException e) {
-            System.err.println("Bağlantı hatası: " + e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
     }
 
     public Connection getConnection() {
         return connection;
-    }
-
-    public void disconnect() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Bağlantı kapatıldı.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Bağlantı kapatma hatası: " + e.getMessage());
-        }
     }
 }

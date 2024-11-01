@@ -12,6 +12,7 @@ module org.example.hastane {
     requires jdk.compiler;
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
+    requires org.postgresql.jdbc;
 
 
     opens org.example.hastane.controllers to javafx.fxml;
