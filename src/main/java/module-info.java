@@ -10,6 +10,11 @@ module org.example.hastane {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires jdk.compiler;
+    requires java.sql;
+    requires io.github.cdimascio.dotenv.java;
+
+
+    opens org.example.hastane.controllers to javafx.fxml;
 
     exports org.example.hastane;
     exports org.example.hastane.controllers;

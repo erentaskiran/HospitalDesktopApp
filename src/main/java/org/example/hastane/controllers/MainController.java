@@ -7,7 +7,7 @@ public class MainController {
 
     public  void onHastaClicked() {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("/views/login.fxml"));
+        loader.setLocation(Main.class.getResource("/org/example/hastane/views/login.fxml"));
         try {
             loader.load();
         } catch (Exception e) {
@@ -17,7 +17,7 @@ public class MainController {
 
     public  void onDoktorClicked() {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("/views/login.fxml"));
+        loader.setLocation(Main.class.getResource("/org/example/hastane/views/login.fxml"));
         try {
             loader.load();
         } catch (Exception e) {
