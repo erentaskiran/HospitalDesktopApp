@@ -9,9 +9,9 @@ module org.example.hastane {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires jdk.compiler;
 
-    opens org.example.hastane to javafx.fxml;
     exports org.example.hastane;
-    exports;
-    opens to
+    exports org.example.hastane.controllers;
+    exports org.example.hastane.models;
 }
